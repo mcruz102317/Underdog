@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS flight_delay_raw;
-CREATE EXTERNAL TABLE IF NOT EXISTS flight_delay_raw(
+CREATE TABLE IF NOT EXISTS flight_delay_raw(
 row_id int,
 year int,
 month int,
@@ -31,11 +31,6 @@ nas_delay int,
 security_delay int,
 late_aircraft_delay int
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
-WITH SERDEPROPERTIES (
-   'separatorChar' = ',',
-   'quoteChar' = '\"',
-   'escapeChar' = '\\'
-   )
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE TBLPROPERTIES(
 "skip.header.line.count"="1");
